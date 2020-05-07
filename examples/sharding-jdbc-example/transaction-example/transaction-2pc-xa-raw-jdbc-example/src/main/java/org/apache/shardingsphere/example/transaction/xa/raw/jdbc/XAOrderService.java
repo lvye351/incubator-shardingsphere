@@ -52,10 +52,10 @@ class XAOrderService {
     void init() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            statement.execute("DROP TABLE IF EXISTS t_order");
-            statement.execute("CREATE TABLE t_order (order_id BIGINT AUTO_INCREMENT, user_id INT NOT NULL, status VARCHAR(50), PRIMARY KEY (order_id))");
+           statement.execute("DROP TABLE  t_order");
+            statement.execute("CREATE TABLE t_order (order_id number(20)  , user_id number NOT NULL, status VARCHAR(50))");
             // for PostgreSQL
-//            statement.execute("CREATE TABLE IF NOT EXISTS t_order (order_id BIGINT PRIMARY KEY NOT NULL, user_id INT NOT NULL, status VARCHAR(50))");
+//            statement.execute("CREATE TABLE IF  t_order (order_id BIGINT PRIMARY KEY NOT NULL, user_id INT NOT NULL, status VARCHAR(50))");
         }
     }
     
@@ -65,7 +65,7 @@ class XAOrderService {
     void cleanup() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            statement.execute("DROP TABLE IF EXISTS t_order");
+            statement.execute("DROP TABLE  t_order");
         }
     }
     
@@ -75,7 +75,7 @@ class XAOrderService {
      * @throws SQLException SQL exception
      */
     void insert() throws SQLException {
-        TransactionTypeHolder.set(TransactionType.XA);
+        //TransactionTypeHolder.set(TransactionType.XA);
         try (Connection connection = dataSource.getConnection()) {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO t_order (user_id, status) VALUES (?, ?)");
@@ -100,7 +100,7 @@ class XAOrderService {
     }
     
     private void doInsert(final PreparedStatement preparedStatement) throws SQLException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             preparedStatement.setObject(1, i);
             preparedStatement.setObject(2, "init");
             preparedStatement.executeUpdate();

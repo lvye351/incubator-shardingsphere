@@ -39,8 +39,8 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
     
     @Override
     public void createTableIfNotExists() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS t_order_item "
-            + "(order_item_id BIGINT NOT NULL AUTO_INCREMENT, order_id BIGINT NOT NULL, user_id INT NOT NULL, status VARCHAR(50), PRIMARY KEY (order_item_id))";
+        String sql = "CREATE TABLE   t_order_item "
+            + "(order_item_id decimal(20)  , order_id decimal(20) ,  user_id INT NOT NULL, status VARCHAR(50))";
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
@@ -76,7 +76,7 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
             preparedStatement.executeUpdate();
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 if (resultSet.next()) {
-                    orderItem.setOrderItemId(resultSet.getLong(1));
+                    //orderItem.setOrderItemId(resultSet.getLong(1));
                 }
             }
         }

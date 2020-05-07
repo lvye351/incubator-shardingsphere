@@ -43,10 +43,13 @@ public final class SQLLogger {
      */
     public static void logSQL(final String logicSQL, final boolean showSimple, final ExecutionContext executionContext) {
         log("Logic SQL: {}", logicSQL);
+        if(executionContext!=null)
         log("SQLStatement: {}", executionContext.getSqlStatementContext());
         if (showSimple) {
+            if(executionContext!=null)
             logSimpleMode(executionContext.getExecutionUnits());
         } else {
+            if(executionContext!=null)
             logNormalMode(executionContext.getExecutionUnits());
         }
     }

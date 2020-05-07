@@ -39,8 +39,8 @@ public final class AddressRepositoryImpl implements AddressRepository {
     
     @Override
     public void createTableIfNotExists() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS t_address "
-            + "(address_id BIGINT NOT NULL, address_name VARCHAR(100) NOT NULL, PRIMARY KEY (address_id))";
+        String sql = "CREATE TABLE   t_address "
+            + "(address_id decimal(20) NOT NULL, address_name VARCHAR(100) NOT NULL, PRIMARY KEY (address_id))";
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);

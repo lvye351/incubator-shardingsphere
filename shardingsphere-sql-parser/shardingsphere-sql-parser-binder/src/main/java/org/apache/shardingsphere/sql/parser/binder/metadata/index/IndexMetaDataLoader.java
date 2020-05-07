@@ -47,6 +47,7 @@ public final class IndexMetaDataLoader {
         try (ResultSet resultSet = connection.getMetaData().getIndexInfo(connection.getCatalog(), connection.getSchema(), table, false, false)) {
             while (resultSet.next()) {
                 String indexName = resultSet.getString(INDEX_NAME);
+                if(indexName != null)
                 result.add(new IndexMetaData(indexName));
             }
         }

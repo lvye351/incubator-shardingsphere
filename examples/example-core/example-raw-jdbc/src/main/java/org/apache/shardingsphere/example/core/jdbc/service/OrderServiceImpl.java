@@ -69,7 +69,7 @@ public final class OrderServiceImpl implements ExampleService {
     }
     
     private void initAddressData() throws SQLException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             insertAddress(i);
         }
     }
@@ -83,18 +83,18 @@ public final class OrderServiceImpl implements ExampleService {
     
     @Override
     public void cleanEnvironment() throws SQLException {
-        orderRepository.dropTable();
-        orderItemRepository.dropTable();
-        addressRepository.dropTable();
+//        orderRepository.dropTable();
+//        orderItemRepository.dropTable();
+//        addressRepository.dropTable();
     }
-    
-    @Override
-    public void processSuccess() throws SQLException {
-        System.out.println("-------------- Process Success Begin ---------------");
-        List<Long> orderIds = insertData();
-        printData();
-        deleteData(orderIds);
-        printData();
+
+        @Override
+        public void processSuccess() throws SQLException {
+            System.out.println("-------------- Process Success Begin ---------------");
+            List<Long> orderIds = insertData();
+            printData();
+//        deleteData(orderIds);
+//        printData();
         System.out.println("-------------- Process Success Finish --------------");
     }
     
@@ -109,7 +109,7 @@ public final class OrderServiceImpl implements ExampleService {
     private List<Long> insertData() throws SQLException {
         System.out.println("---------------------------- Insert Data ----------------------------");
         List<Long> result = new ArrayList<>(10);
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 2; i++) {
             Order order = insertOrder(i);
             insertOrderItem(i, order);
             result.add(order.getOrderId());

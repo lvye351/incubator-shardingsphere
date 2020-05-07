@@ -45,7 +45,7 @@ public class XAOrderServiceTest {
     @Test
     public void assertInsertSuccess() throws SQLException {
         orderService.insert();
-        assertThat(orderService.selectAll(), is(10));
+        assertThat(orderService.selectAll(), is(2));
     }
     
     @Test
